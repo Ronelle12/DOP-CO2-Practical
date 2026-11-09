@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    on-failure: ABORT
+    commands:
+       - echo "preparing environment"
+  
+  build:
+    on-failure: ABORT
+    commands:
+ 	- |
+	  FILE="/app/index.html"
+          if [ -f "$FILE" ]; then
+	     echo "File exists"
+	  fi
+artifacts:
+  files:
+     - index.html
+     - appspec.yml
+     - scripts/**/*
+
