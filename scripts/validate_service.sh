@@ -1,17 +1,28 @@
 #!/bin/bash
-# Verify that the deployed application is accessible
-echo "Validating application service..."
+set -euo pipefail
 
-# Wait a brief moment for the webserver to process updates
-sleep 2
+URL="http://127.0.0.1/"
+EXPECTED_TEXT="AWS DevOps Professional Lab"
 
-# Check if localhost returns an HTTP 200 Status
-STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/)
+echo "Validating application..."
 
-if [ "$STATUS_CODE" -eq 200 ]; then
-    echo "Validation successful! Application is accessible (HTTP 200)."
-    exit 0
-else
-    echo "Validation failed! Received HTTP status code: $STATUS_CODE"
-    exit 1
-fi
+for attempt in {1..10}; do
+    if RESPONSE=$(curl \
+        --fail \
+        --silent \
+        --show-error \
+        --max-time 5 \
+        "$URL" 2>/dev/null); then
+
+        if grep -q "$EXPECTED_TEXT" <<< "$RESPONSE"; then
+            echo "Application validation successful."
+            exit 0
+        fi
+    fi
+
+    echo "Attempt $attempt: Application not ready."
+    sleep 3
+done
+
+echo "ERROR: Application validation failed."
+exit 1

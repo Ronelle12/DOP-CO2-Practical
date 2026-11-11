@@ -9,14 +9,17 @@ phases:
   build:
     on-failure: ABORT
     commands:
- 	- |
-	  FILE="/app/index.html"
-          if [ -f "$FILE" ]; then
-	     echo "File exists"
-	  fi
+       - |
+         FILE="app/index.html"
+         if [ -f "$FILE" ]; then
+          echo "File exists"
+         else
+          echo "File missing"
+          exit 1
+         fi
 artifacts:
   files:
-     - index.html
+     - app/index.html
      - appspec.yml
      - scripts/**/*
 
