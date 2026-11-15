@@ -22,4 +22,6 @@ artifacts:
      - app/index.html
      - appspec.yml
      - scripts/**/*
+  name: devops-prof-practice
+  packaging: ZIP
 
