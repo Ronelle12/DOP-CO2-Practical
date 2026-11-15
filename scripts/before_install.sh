@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-TARGET_DIR="/var/www/html"
+TARGET_DIR="/usr/share/nginx/html"
 
 echo "Preparing deployment directory..."
 

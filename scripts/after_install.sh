@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-TARGET_FILE="/var/www/html/index.html"
+TARGET_FILE="/usr/share/nginx/html/index.html"
 
 echo "Setting application permissions..."
 
