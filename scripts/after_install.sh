@@ -10,7 +10,7 @@ if [[ ! -f "$TARGET_FILE" ]]; then
     exit 1
 fi
 
-chmod 755 /var/www/html
+chmod 755 /usr/share/nginx/html
 chmod 644 "$TARGET_FILE"
 
 echo "Permissions updated successfully."
